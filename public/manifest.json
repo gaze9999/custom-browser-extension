@@ -1,0 +1,41 @@
+{
+  "description": "Change DuckDuckGo styles and etc.",
+  "manifest_version": 3,
+  "name": "DuckDuckGo Extension",
+  "version": "0.0.1",
+  "icons": {
+
+  },
+  "action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "./static/js/background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "background",
+    "scripting",
+    "storage",
+    "sessions",
+    "tabs",
+    "activeTab",
+    "tabGroups",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "js": [ "./static/js/ddg-search.js" ],
+      "run_at": "document_start",
+      "matches": [ "https://duckduckgo.com/*" ]
+    },
+    {
+      "js": [ "./static/js/ddg-search-style.js" ],
+      "run_at": "document_idle",
+      "matches": [ "https://duckduckgo.com/*" ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+html.set-wide
+  #header_wrapper
+    #header
+      max-width: 90vw
+      .header__search-wrap
+        max-width: 65vw
+  #links_wrapper
+    padding: 1rem
+    display: flex
+    justify-content: center
+    .results--main
+      flex: 1
+      max-width: 70vw
+    .results--sidebar
+      margin: 12px 9px 0 12px
+      min-width: 0
+
+html:not(.set-wide, .set-super-wide)
+  #header_wrapper
+    #duckbar .zcm
+      width: 65vw
+    #header .header__search-wrap
+      max-width: 65vw
+  #links_wrapper
+    padding: 1rem
+    display: flex
+    justify-content: center
+    .results--main
+      flex: 1
+      max-width: 70vw
+    .results--sidebar
+      margin: 12px 9px 0 12px
+      min-width: 0
