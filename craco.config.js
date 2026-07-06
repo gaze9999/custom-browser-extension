@@ -10,7 +10,12 @@ module.exports = {
           'ddg-search-style': './src/styles/ddg-search.sass',
         },
         resolve: {
+          ...webpackConfig.resolve,
           extensions: ['.tsx', '.ts', '.js'],
+          fallback: {
+            ...(webpackConfig.resolve?.fallback || {}),
+            url: require.resolve('url/'),
+          },
         },
         output: {
           ...webpackConfig.output,
@@ -58,14 +63,7 @@ module.exports = {
     },
   },
   eslint: {
-    enable: true,
-    mode: 'extends',
-    configure: (eslintConfig, { env, paths }) => {
-      return eslintConfig;
-    },
-    pluginOptions: (eslintPluginOptions, { env, paths }) => {
-      return eslintPluginOptions;
-    },
+    enable: false,
   },
   style: {
     modules: {

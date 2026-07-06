@@ -1,8 +1,5 @@
 {
   "files.exclude": {
     "*.code-workspace": true,
-  },
-  "eslint.workingDirectories": [
-    "./",
-  ],
+  }
 }
