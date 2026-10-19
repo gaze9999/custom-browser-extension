@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Threads 登入提示移除",
+  "version": "0.1.0",
+  "description": "隱藏 Threads 公開頁面的登入彈窗, 並解除該彈窗造成的捲動鎖定",
+  "content_scripts": [
+    {
+      "matches": ["https://threads.com/*", "https://www.threads.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

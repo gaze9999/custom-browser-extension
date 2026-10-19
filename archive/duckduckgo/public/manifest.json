@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "DuckDuckGo Extension",
+  "version": "0.1.0",
+  "description": "調整 DuckDuckGo 搜尋頁版面並移除頁首干擾項目",
+  "minimum_chrome_version": "120",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "static/js/background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://duckduckgo.com/*"
+      ],
+      "js": [
+        "static/js/ddg-search.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://duckduckgo.com/*"
+      ],
+      "css": [
+        "static/js/ddg-search-style.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

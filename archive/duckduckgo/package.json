@@ -1,0 +1,31 @@
+{
+  "name": "duckduckgo-extension-archive",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node tools/build.mjs --watch",
+    "build": "pnpm typecheck && node tools/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "check": "pnpm build && pnpm test && pnpm test:browser"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.3.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "esbuild": "0.28.2",
+    "playwright": "1.64.1",
+    "sass": "1.105.2",
+    "typescript": "7.0.2"
+  }
+}

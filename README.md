@@ -1,91 +1,55 @@
-# DuckDuckGo Extension
+# Custom Browser Extensions
 
-## 專案狀態
+個人使用的 Chrome / Edge 擴充套件集合, 目前維護 Threads 登入提示移除
 
-本專案已失效（Deprecated / Legacy），目前不再進行新功能開發。
+| 套件 | 狀態 | 位置 |
+| --- | --- | --- |
+| [Threads 登入提示移除 0.1.0](extensions/threads-login-remover/README.md) | 維護中 | `extensions/threads-login-remover` |
+| [DuckDuckGo Extension 0.1.0](archive/duckduckgo/README.md) | Archived | `archive/duckduckgo` |
 
-目前所有更新僅用於讓過期專案可在現行 Edge / Chrome 環境中繼續運作，屬維護性修補，不代表功能仍持續演進或長期維護。
+## 安裝 Threads 套件
 
-此專案為瀏覽器擴充套件，目標為調整 DuckDuckGo 搜尋頁的版面並移除頁首干擾項目，支援 Microsoft Edge 與 Google Chrome（Chromium 系列瀏覽器）。
+1. Chrome 開啟 `chrome://extensions`, Edge 開啟 `edge://extensions`
+2. 啟用「開發人員模式」, 選擇「載入未封裝項目」
+3. 選取 `extensions/threads-login-remover` 資料夾
+4. 重新整理 Threads 頁面
 
-## 功能說明
+這個資料夾可直接載入, 不需 Node.js 或建置, 可隱藏繁中與英文登入彈窗及遮罩, 並處理重複提示造成的捲動鎖定, 其他對話框與獨立登入頁保留
 
-目前已實作功能如下：
+## 開發與驗證
 
-1. 調整 DuckDuckGo 搜尋頁面寬度與排版。
-2. 在頁面載入後移除頁首右側的項目（header aside items）。
-3. 提供 Popup 介面按鈕，點擊時會送出訊息給 background 與目前分頁的 content script（目前為除錯用途）。
-4. 安裝擴充套件時，會在工具列圖示顯示徽章文字 LOL（可於 background 程式自行調整）。
+開發環境使用 Node.js 24 以上與 pnpm 12.11.2, 瀏覽器執行程式為原生 JavaScript, 相依套件僅用於開發驗證
 
-## 套件權限
-
-Manifest V3 權限配置：
-
-1. storage：保留擴充設定儲存能力。
-2. tabs：讓 popup 可取得目前分頁資訊並傳送訊息。
-3. activeTab：允許對當前作用分頁執行互動。
-4. host_permissions: <all_urls>：允許在需要時讀取目前頁面內容；實際 content script 目前只匹配 DuckDuckGo。
-
-## 生效網站與注入腳本
-
-目前僅對下列網址生效：
-
-1. https://duckduckgo.com/*
-
-注入腳本：
-
-1. static/js/ddg-search.js（document_start）
-2. static/js/ddg-search-style.js（document_idle）
-
-## 安裝與使用方式（Edge / Chrome）
-
-### 1. 安裝相依套件
-
-使用 pnpm：
-
-```bash
-pnpm install
+```powershell
+pnpm install --frozen-lockfile
+pnpm build
 ```
 
-### 2. 建置套件
+建置產物位於 `build/threads-login-remover`, 可依上述步驟載入, 產物只包含 manifest 與 content script
 
-```bash
-pnpm run build
-```
+| 指令 | 用途 |
+| --- | --- |
+| `pnpm start` | 監看 Threads 來源並更新建置目錄, Ctrl+C 結束 |
+| `pnpm check:syntax` | 檢查執行程式與建置腳本的 JavaScript 語法 |
+| `pnpm build` | 語法檢查並產生 Threads 套件 |
+| `pnpm test` | 檢查已建置資源與來源一致性, 需先建置 |
+| `pnpm test:browser` | 在隔離的瀏覽器 profile 驗證 Threads 合成頁面 |
+| `pnpm test:threads:live` | 另外驗證範例 Threads 真實貼文頁面的彈窗與捲動 |
+| `pnpm check` | 依序執行建置、產物檢查與瀏覽器測試 |
 
-建置完成後會輸出至 build 目錄。
+瀏覽器測試需提供支援 `Extensions.loadUnpacked` 的 Chromium, 可透過 `CHROMIUM_EXECUTABLE` 指定既有 Chrome / Edge 執行檔, 測試不使用日常瀏覽器 profile, 結束時清除自行建立的暫存 profile
 
-### 3. 載入到 Edge
+修改來源後需在擴充功能管理頁重新載入套件, 再重新整理 Threads 頁面, 提示文案或結構改變時需重新核對辨識條件
 
-1. 開啟 edge://extensions
-2. 開啟 Developer mode
-3. 點選 Load unpacked
-4. 選取專案的 build 目錄
+## DuckDuckGo 封存
 
-### 4. 載入到 Chrome
+依使用者於 2026-10-19 的確認, 官方已支援所需功能, DuckDuckGo 套件改為封存, 主專案的預設建置、測試與交付均不包含它
 
-1. 開啟 chrome://extensions
-2. 開啟 Developer mode
-3. 點選 Load unpacked
-4. 選取專案的 build 目錄
+原始碼與 React / TypeScript / esbuild / Sass 工具鏈保留於封存資料夾, 回查方式見 [封存說明](archive/duckduckgo/README.md)
 
-## 開發指令
+## 原始碼位置
 
-```bash
-pnpm start
-pnpm run build
-pnpm test
-```
-
-## 專案結構重點
-
-1. public/manifest.json：擴充套件設定與權限。
-2. src/chrome-services/background.ts：背景服務（Service Worker）。
-3. src/chrome-services/dom-evaluators/ddg-search.ts：DuckDuckGo 頁面邏輯。
-4. src/styles/ddg-search.sass：DuckDuckGo 版面樣式。
-5. src/App.tsx：Popup 介面。
-
-## 注意事項
-
-1. 本專案使用 CRACO 覆寫 webpack 設定，入口檔包含 popup、background 與 content scripts。
-2. 目前建置可能出現 Sass legacy JS API deprecation 警告，屬非阻塞警告，不影響 Edge/Chrome 載入。
+- `extensions/threads-login-remover/`: 可直接載入的 Threads 套件與瀏覽器測試
+- `tools/build.mjs`: 以明確檔案清單產生 Threads 套件, 支援來源監看
+- `tests/`: 主專案的建置產物與來源一致性檢查
+- `archive/duckduckgo/`: 停止維護的 DuckDuckGo 原始碼與獨立回查工具鏈
