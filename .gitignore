@@ -25,3 +25,14 @@
 .env.production.local
 
 npm-debug.log*
+
+# Private signing material and generated extension packages
+*.key
+*.p12
+*.pfx
+*.crx
+/build.pem
+
+# Python publication-check caches
+__pycache__/
+*.py[cod]
