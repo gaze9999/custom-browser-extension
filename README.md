@@ -30,6 +30,7 @@ pnpm build
 | 指令 | 用途 |
 | --- | --- |
 | `pnpm start` | 監看 Threads 來源並更新建置目錄, Ctrl+C 結束 |
+| `pnpm check:public` | 檢查所有 Git 歷史與暫存區的公開內容 |
 | `pnpm check:syntax` | 檢查執行程式與建置腳本的 JavaScript 語法 |
 | `pnpm build` | 語法檢查並產生 Threads 套件 |
 | `pnpm test` | 檢查已建置資源與來源一致性, 需先建置 |
@@ -53,3 +54,5 @@ pnpm build
 - `tools/build.mjs`: 以明確檔案清單產生 Threads 套件, 支援來源監看
 - `tests/`: 主專案的建置產物與來源一致性檢查
 - `archive/duckduckgo/`: 停止維護的 DuckDuckGo 原始碼與獨立回查工具鏈
+
+公開內容檢查需 Python 3.10 以上, 新 clone 的 hooks 啟用方式與交付條件見 [公開內容保護](docs/public-content.md)

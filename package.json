@@ -8,6 +8,7 @@
     "node": ">=24"
   },
   "scripts": {
+    "check:public": "python tools/check-public-content.py --history --index",
     "start": "node tools/build.mjs --watch",
     "check:syntax": "node --check extensions/threads-login-remover/content.js && node --check tools/build.mjs",
     "build": "pnpm check:syntax && node tools/build.mjs",
