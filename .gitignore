@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Private signing material and generated extension packages
+*.key
+*.p12
+*.pfx
+*.crx
+/build.pem
+
+__pycache__/
+*.py[cod]
