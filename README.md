@@ -38,7 +38,8 @@ pnpm build
 | `pnpm test:threads:live` | 另外驗證範例 Threads 真實貼文頁面的彈窗與捲動 |
 | `pnpm check` | 依序執行建置、產物檢查與瀏覽器測試 |
 
-瀏覽器測試需提供支援 `Extensions.loadUnpacked` 的 Chromium, 可透過 `CHROMIUM_EXECUTABLE` 指定既有 Chrome / Edge 執行檔, 測試不使用日常瀏覽器 profile, 結束時清除自行建立的暫存 profile
+瀏覽器測試預設使用系統 Edge Stable, 沿用其已套用的更新版本, 需支援 `Extensions.loadUnpacked`, 可透過 `CHROMIUM_EXECUTABLE` 指定其他相容的瀏覽器執行檔
+測試不使用日常瀏覽器 profile, 結束時清除自行建立的暫存 profile
 
 修改來源後需在擴充功能管理頁重新載入套件, 再重新整理 Threads 頁面, 提示文案或結構改變時需重新核對辨識條件
 
