@@ -42,3 +42,5 @@ __pycache__/
 **/.claude/settings.local.json
 **/.codex/config.toml
 **/.codex/auth.json
+CLAUDE.local.md
+**/.claude/worktrees/
