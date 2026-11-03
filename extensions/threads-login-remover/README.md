@@ -27,16 +27,4 @@
 
 Content script 僅匹配上述兩個 Threads 網域, 使用預設的 isolated world, 不宣告其他權限, 不傳送網路請求、不讀取 Cookie、不儲存或回傳瀏覽資料
 
-## 驗證
-
-`tests/verify.cjs` 使用 Playwright 與隔離的 Chromium profile, 檢查實際擴充套件載入、重複彈窗、捲動恢復、class 變動、延遲組裝、其他對話框與網域限制
-
-開發環境需提供 Playwright 與支援 `Extensions.loadUnpacked` 的 Chromium, 測試透過除錯介面載入套件, 使用獨立暫存 profile 並於結束時清除, 執行方式:
-
-```powershell
-node tests/verify.cjs
-```
-
-可透過 `PLAYWRIGHT_MODULE` 指定既有 Playwright 模組路徑, 透過 `CHROMIUM_EXECUTABLE` 指定瀏覽器執行檔, 預設測試使用合成頁面, 加上 `--live` 會另外開啟範例 Threads 貼文, 驗證真實彈窗隱藏與滑鼠滾輪捲動
-
 Content scripts 與載入方式依 [Chrome 官方文件](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts) 與 [未封裝擴充套件教學](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world)

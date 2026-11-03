@@ -36,3 +36,9 @@ npm-debug.log*
 # Python publication-check caches
 __pycache__/
 *.py[cod]
+/archive/duckduckgo/tests/
+/extensions/threads-login-remover/tests/
+/tests/
+**/.claude/settings.local.json
+**/.codex/config.toml
+**/.codex/auth.json

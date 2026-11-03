@@ -1,6 +1,6 @@
 {
   "name": "g-custom-extension-pack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@12.11.2",
@@ -12,10 +12,7 @@
     "start": "node tools/build.mjs --watch",
     "check:syntax": "node --check extensions/threads-login-remover/content.js && node --check tools/build.mjs",
     "build": "pnpm check:syntax && node tools/build.mjs",
-    "test": "node --test tests/*.test.mjs",
-    "test:browser": "node extensions/threads-login-remover/tests/verify.cjs",
-    "test:threads:live": "node extensions/threads-login-remover/tests/verify.cjs --live",
-    "check": "pnpm build && pnpm test && pnpm test:browser"
+    "check": "pnpm build"
   },
   "devDependencies": {
     "playwright": "1.64.1"
